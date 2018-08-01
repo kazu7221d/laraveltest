@@ -16,9 +16,9 @@ class ArticleController extends Controller
     public function index()
     {
         // データベース内の記事を全選択
-        $articles = Article::all();
-        $text = ArticleController::search();
-        return view('articles', compact('articles','text'));
+        #$articles = Article::all();
+        $articles = ArticleController::search();
+        return view('articles', compact('articles'));
     }
 
     /**
@@ -89,11 +89,20 @@ class ArticleController extends Controller
 
     public function search()
     {
+        $articles = array();
+
+        #htmlの取得
         $html = file_get_contents("http://computermusic.jp/category/%e3%82%bb%e3%83%bc%e3%83%ab/page/2/");
-        $doc = phpQuery::newDocument($html);
-        foreach($doc->find(".top-post-list")->find("h1") as $h1){
-          $title[] = pq($h1)->text();
+        $dom = phpQuery::newDocument($html);
+
+        #記事ごとに処理をループ
+        foreach($dom["article"] as $post){
+          $title = pq($post)->find("h1")->text();
+          $product = preg_split("/[「」]/",$title)[0];
+          $posting_date = pq($post)->find(".date")->text();
+          $p = array('title' => $title, 'product' => $product, 'posting_date' => $posting_date);
+          array_push($articles, $p);
         }
-        return $title;
+        return $articles;
     }
 }

@@ -20,15 +20,12 @@
     </th>
     @foreach ($articles as $a)
     <tr>
-      <td>{{ $a->id              }}</td>
-      <td>{{ $a->title           }}</td>
-      <td>{{ $a->discount_amount }}</td>
-      <td>{{ $a->discount_rate   }}</td>
-      <td>{{ $a->posting_date    }}</td>
+      <td>id</td>
+      <td>{{ $a['title'] }}</td>
+      <td>{{ $a['product'] }}</td>
+      <td>ss</td>
+      <td>{{ $a['posting_date'] }}</td>
     </th>
-    @endforeach
-    @foreach ($text as $t)
-      {{ $t }} <br />
     @endforeach
   </table>
 @endsection
