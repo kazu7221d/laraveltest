@@ -12,19 +12,21 @@
   {!! Form::close() !!}
   <table class='table table-striped'>
     <tr>
-      <th>id</th>
-      <th>記事タイトル</th>
-      <th>割引額</th>
-      <th>割引率</th>
+      <!--<th>id</th>-->
+      <th>見出し</th>
+      <th>製品名</th>
+      <th>割引率・割引額</th>
       <th>掲載日</th>
+      <th>URL</th>
     </th>
     @foreach ($articles as $a)
     <tr>
-      <td>id</td>
+      <!--<td>id</td>-->
       <td>{{ $a['title'] }}</td>
       <td>{{ $a['product'] }}</td>
-      <td>ss</td>
+      <td>{{ $a['discount'] }}</td>
       <td>{{ $a['posting_date'] }}</td>
+      <td><a href="{{ $a['url'] }}">リンク</a></td>
     </th>
     @endforeach
   </table>
